@@ -5,6 +5,7 @@ import axios from 'axios';
 import 'bootswatch/dist/lux/bootstrap.min.css';
 import './App.css';
 
+
 const stripePromise = loadStripe("pk_test_51HSTsREymoDGodVFi1graclqOUm86NgO54oI6WeBaidQNZnXIOsHiuQLPQmq1UWpX1Y6Nk3JuuPjaN9FGYZ1AQeV000IlEgwZT");
 
 const CheckoutForm = () => {
@@ -22,9 +23,10 @@ const CheckoutForm = () => {
     });
 
     if(!error){      
-      const id = paymentMethod;
+      const { id } = paymentMethod;
+
       const { data } = await axios.post(
-        "http://127.0.0.1:4000/api/checkout",
+        "http://localhost:3001/api/checkout",
         {
           id,
           amount: 10000,
@@ -32,7 +34,7 @@ const CheckoutForm = () => {
       );
       console.log(data);
     }
-  }
+  };
 
   return <form onSubmit={handleSubmit} className="card card-body">
 
